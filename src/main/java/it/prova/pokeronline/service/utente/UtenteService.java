@@ -20,4 +20,11 @@ public interface UtenteService {
 
 	public List<Utente> findByExample(Utente example, String[] ruoli);
 	
+	public Utente findByUsername(String username);
+	
+	public void cambiaPassword(String nuova, String vecchia, String conferma, Utente utenteInstance);
+	
+	public void changeUserAbilitation(Long utenteInstanceId);
+	
+	public void aggiornaPassword (Utente utenteInstance);
 }

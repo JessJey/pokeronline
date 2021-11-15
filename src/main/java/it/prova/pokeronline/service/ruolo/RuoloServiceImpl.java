@@ -42,4 +42,9 @@ public class RuoloServiceImpl implements RuoloService {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public Ruolo cercaPerDescrizioneCodice(String descrizione, String codice) {
+		return ruoloRepository.findByDescrizioneAndCodice(descrizione, codice);
+	}
 }

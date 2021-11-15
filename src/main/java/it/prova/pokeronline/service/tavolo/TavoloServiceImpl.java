@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import it.prova.pokeronline.model.Tavolo;
 import it.prova.pokeronline.repository.tavolo.TavoloRepository;
 
-public class TavoloServiceImpl {
+public class TavoloServiceImpl implements TavoloService  {
 
 	@Autowired
 	TavoloRepository repository;
@@ -40,6 +40,6 @@ public class TavoloServiceImpl {
 
 	@Transactional(readOnly = true)
 	public List<Tavolo> findByExample(Tavolo example) {
-		return repository.findByExample(example);
+		return null;
 	}
 }

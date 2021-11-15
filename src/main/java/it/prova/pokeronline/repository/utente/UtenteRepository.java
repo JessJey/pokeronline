@@ -2,6 +2,7 @@ package it.prova.pokeronline.repository.utente;
 
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -12,4 +13,7 @@ public interface UtenteRepository extends CrudRepository<Utente, Long>, CustomUt
 	
 	@Query("from Utente u left join fetch u.ruoli where u.id = ?1")
 	Optional<Utente> findByIdConRuoli(Long id);
+	
+	@EntityGraph(attributePaths = { "ruoli" })
+	Optional<Utente> findByUsername(String username);
 }

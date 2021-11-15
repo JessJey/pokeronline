@@ -15,4 +15,6 @@ public List<Ruolo> listAll() ;
 	public void inserisciNuovo(Ruolo ruoloInstance) ;
 
 	public void rimuovi(Ruolo ruoloInstance) ;
+	
+	public Ruolo cercaPerDescrizioneCodice(String descrizione, String codice);
 }
