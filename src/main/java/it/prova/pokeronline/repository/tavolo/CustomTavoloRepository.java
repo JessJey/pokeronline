@@ -14,5 +14,7 @@ public interface CustomTavoloRepository {
 	
 	public List<Tavolo> findByExample(Tavolo example);
 	
+	public List<Tavolo> findByExample(TavoloDTO example);
+	
 	
 }

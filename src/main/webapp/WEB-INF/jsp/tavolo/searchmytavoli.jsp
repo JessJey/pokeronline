@@ -52,7 +52,7 @@
 										<label for="utenteCreatoreSearchInput" class="form-label">Creatore tavolo:</label>
 										<input class="form-control " type="text" id="utenteCreatoreSearchInput"
 												name="utenteCreatoreInput" value="${search_gestione_tavolo_attr.utenteCreatore.nome}${search_gestione_tavolo_attr.utenteCreatore.cognome}">
-										<input type="hidden" name="utenteCreatore.id" id="utenteCreatoreId" value="${search_gestione_tavolo_attr.utenteCreatore.id}">
+										<input type="hidden" name="utenteCreatore.id" id="utenteCreatoreSearchInput" value="${search_gestione_tavolo_attr.utenteCreatore.id}">
 									</div>
 								</sec:authorize>
 								

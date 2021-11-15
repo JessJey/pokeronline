@@ -152,5 +152,11 @@ public class UtenteDTO {
 				utenteModel.getCognome(), utenteModel.getStato(),
 				RuoloDTO.createRuoloDTOListFromModelSet(utenteModel.getRuoli()));
 	}
+	
+	public static List<UtenteDTO> createUtenteDTOListFromModelList(List<Utente> modelListInput) {
+		return modelListInput.stream().map(utenteEntity -> {
+			return UtenteDTO.buildUtenteDTOFromModel(utenteEntity);
+		}).collect(Collectors.toList());
+	}
 
 }

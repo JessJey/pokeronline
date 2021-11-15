@@ -29,4 +29,6 @@ public interface UtenteService {
 	public void aggiornaPassword (Utente utenteInstance);
 	
 	public List<Utente> cercaByCognomeENomeILike(String term);
+	
+	public void addCredito(Utente utenteInstance, int creditoDaAggiungere);
 }

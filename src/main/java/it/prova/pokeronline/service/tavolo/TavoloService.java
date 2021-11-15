@@ -20,6 +20,8 @@ public interface TavoloService {
 	
 	public List<Tavolo> findByExample(Tavolo example);
 	
+	public List<Tavolo> findByExample(TavoloDTO example);
+	
 	public List<Tavolo> findAllMyTavoli(Utente example);
 	
 	public Tavolo caricaTavoloConGiocatori(Long id);

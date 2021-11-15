@@ -21,6 +21,7 @@
 								aria-current="page"
 								href="${pageContext.request.contextPath}/home">Home</a></li>
 								
+								<sec:authorize access="hasRole('ADMIN') || hasRole('SPECIAL_PLAYER')">
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" id="dropdown07"
 								data-bs-toggle="dropdown" aria-expanded="false">Gestione My Tavoli</a>
@@ -34,6 +35,7 @@
 									<li><a class="dropdown-item"
 										href="${pageContext.request.contextPath}/tavolo/insert">Crea un Tavolo</a></li>
 								</ul></li>
+								</sec:authorize>
 								
 							<sec:authorize access="hasRole('ADMIN')">
 								<li class="nav-item dropdown"><a
@@ -65,8 +67,12 @@
 									<div class="dropdown-menu" aria-labelledby="dropdown03">
 										<a class="dropdown-item"
 											href="${pageContext.request.contextPath}/utente/resetuserpassword">Reset
-											Password</a> <a class="dropdown-item"
-											href="${pageContext.request.contextPath}/logout">Logout</a> 
+											Password</a> 
+											<a class="dropdown-item"
+											href="${pageContext.request.contextPath}/logout">Logout</a>
+											<a class="dropdown-item"
+											href="${pageContext.request.contextPath}/utente/credito">Add Credito
+											</a> 
 									</div></li>
 							</sec:authorize>
 

@@ -191,4 +191,19 @@ public class UtenteController {
 		return new Gson().toJson(ja);
 	}
 	
+	@GetMapping("/credito")
+	public String ricaricaCredito(Model model) {
+		return "utente/credito";		
+	}
+	
+	@PostMapping("/addcredito")
+	public String addCredito(Model model, HttpServletRequest request) {
+		int credito = Integer.parseInt(request.getParameter("creditoAccumulato"));
+		Utente utente = utenteService.findByUsername(request.getUserPrincipal().getName());
+		utente.setCreditoAccumulato(utente.getCreditoAccumulato()+credito);
+		
+		utenteService.aggiorna(utente);
+
+		return "index";	
+	}
 }

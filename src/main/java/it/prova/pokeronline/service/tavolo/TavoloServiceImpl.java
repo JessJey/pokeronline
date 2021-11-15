@@ -80,4 +80,9 @@ public class TavoloServiceImpl implements TavoloService {
 
 		return repository.findByExampleMyTables(tavolo, utente.getId());
 	}
+
+	@Override
+	public List<Tavolo> findByExample(TavoloDTO example) {
+		return repository.findByExample(example);
+	}
 }

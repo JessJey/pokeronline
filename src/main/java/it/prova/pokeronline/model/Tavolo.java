@@ -134,4 +134,6 @@ public class Tavolo {
 				+ ", esperienzaMin=" + esperienzaMin + ", cifraMinima=" + cifraMinima + "]";
 	}
 
+	
+
 }
