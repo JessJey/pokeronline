@@ -23,10 +23,12 @@
 								
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" id="dropdown07"
-								data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+								data-bs-toggle="dropdown" aria-expanded="false">Gestione My Tavoli</a>
 								<ul class="dropdown-menu" aria-labelledby="dropdown07">
 									<li><a class="dropdown-item"
 										href="${pageContext.request.contextPath}/home">Home</a></li>
+										<li><a class="dropdown-item"
+										href="${pageContext.request.contextPath}/tavolo/gestione">Cerca tra i tuoi tavoli</a></li>
 									<li><a class="dropdown-item"
 										href="${pageContext.request.contextPath}/tavolo/mieitavoli">Lista My Tables</a></li>
 									<li><a class="dropdown-item"

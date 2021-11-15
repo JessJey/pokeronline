@@ -27,4 +27,6 @@ public interface UtenteService {
 	public void changeUserAbilitation(Long utenteInstanceId);
 	
 	public void aggiornaPassword (Utente utenteInstance);
+	
+	public List<Utente> cercaByCognomeENomeILike(String term);
 }

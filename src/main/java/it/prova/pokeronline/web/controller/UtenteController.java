@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import it.prova.pokeronline.dto.RuoloDTO;
 import it.prova.pokeronline.dto.UtenteDTO;
@@ -163,6 +169,26 @@ public class UtenteController {
 	public String cambiaStato(@RequestParam(name = "idUtenteForChangingStato", required = true) Long idUtente) {
 		utenteService.changeUserAbilitation(idUtente);
 		return "redirect:/utente";
+	}
+	
+	@GetMapping(value = "/searchUtentiAjax", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public @ResponseBody String searchTavolo(@RequestParam String term) {
+
+		List<Utente> listaTavoloByTerm = utenteService.cercaByCognomeENomeILike(term);
+		return buildJsonResponse(listaTavoloByTerm);
+	}
+
+	private String buildJsonResponse(List<Utente> listaUtenti) {
+		JsonArray ja = new JsonArray();
+
+		for (Utente utenteItem : listaUtenti) {
+			JsonObject jo = new JsonObject();
+			jo.addProperty("value", utenteItem.getId());
+			jo.addProperty("label", utenteItem.getNome() + " " + utenteItem.getCognome());
+			ja.add(jo);
+		}
+
+		return new Gson().toJson(ja);
 	}
 	
 }

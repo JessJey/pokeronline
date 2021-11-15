@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -72,5 +74,87 @@ public class TavoloController {
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/tavolo/mieitavoli";
+	}
+	
+	@GetMapping("/show/{idTavolo}")
+	public String show(@PathVariable(required = true) Long idTavolo, Model model) {
+		Tavolo tavolo = tavoloService.caricaSingoloTavolo(idTavolo);
+		model.addAttribute("show_tavolo_attr", tavolo);
+		return "tavolo/show";
+	}
+	
+	@GetMapping("/edit/{idTavolo}")
+	public String edit(@PathVariable(required = true) Long idTavolo, Model model) {
+		Tavolo tavolo = tavoloService.caricaSingoloTavolo(idTavolo);
+		model.addAttribute("update_tavolo_attr", tavolo);
+		return "tavolo/edit";
+	}
+
+	@PostMapping("/saveUpdate")
+	public String saveUpdate(@Valid @ModelAttribute("update_tavolo_attr") TavoloDTO tavoloDTO, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs, HttpServletRequest request) {
+
+		if (result.hasErrors())
+			return "tavolo/edit";
+
+		Tavolo tavolo = tavoloService.caricaSingoloTavolo(tavoloDTO.getId());
+
+		if (tavolo.getGiocatori().size() == 0) {
+
+			tavoloDTO.setGiocatori(tavolo.getGiocatori());
+			tavoloDTO.setUtenteCreatore(UtenteDTO.buildUtenteDTOFromModel(tavolo.getUtenteCreatore()));
+
+			tavoloService.inserisciNuovo(tavoloDTO.buildTavoloModel());
+			redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		} else
+			request.setAttribute("errorMessage", "Ci sono ancora giocatori che stanno giocando");
+
+		List<Tavolo> tavoli = tavoloService
+				.findAllMyTavoli(utenteService.findByUsername(request.getUserPrincipal().getName()));
+		model.addAttribute("tavolo_list_attribute", tavoli);
+
+		return "tavolo/list";
+	}
+	
+	@GetMapping("/delete/{idTavolo}")
+	public String delete(@PathVariable(required = true) Long idTavolo, Model model) {
+
+		Tavolo tavolo = tavoloService.caricaSingoloTavolo(idTavolo);
+		model.addAttribute("delete_tavolo_attr", tavolo);
+		return "tavolo/delete";
+	}
+
+	@PostMapping("/salvadelete")
+	public String salvadelete(@RequestParam Long idTavolo, Model model, RedirectAttributes redirectAttrs,
+			HttpServletRequest request) {
+
+		if (tavoloService.caricaTavoloConGiocatori(idTavolo).getGiocatori().size() == 0) {
+			tavoloService.rimuoviById(idTavolo);
+			request.setAttribute("successMessage", "Operazione eseguita correttamente");
+		} else
+			request.setAttribute("errorMessage", "Ci sono ancora giocatori che stanno giocando");
+
+		List<Tavolo> tavoli = tavoloService
+				.findAllMyTavoli(utenteService.findByUsername(request.getUserPrincipal().getName()));
+		model.addAttribute("tavolo_list_attribute", tavoli);
+
+		return "tavolo/list";
+	}
+	
+	@GetMapping("/gestione")
+	public String gestione(Model model) {
+
+		model.addAttribute("search_gestione_tavolo_attr", new TavoloDTO());
+		return "tavolo/searchmytavoli";
+	}
+
+	@PostMapping("/listGestione")
+	public String listGestione(@ModelAttribute("search_gestione_tavolo_attr") TavoloDTO tavoloDTO, Model model,
+			RedirectAttributes redirectAttrs, HttpServletRequest request) {
+		
+		List<Tavolo> tavoli = tavoloService.findByExampleMyTables(tavoloDTO, request.getUserPrincipal().getName());
+
+		model.addAttribute("tavolo_list_attribute", TavoloDTO.createTavoloDTOListFromModelList(tavoli));
+		return "tavolo/list";
 	}
 }

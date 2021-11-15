@@ -114,4 +114,9 @@ public class UtenteServiceImpl implements UtenteService {
 		utenteReloaded.setPassword(passwordEncoder.encode("p4ssw0rd@1"));
 		repository.save(utenteReloaded);		
 	}
+
+	@Override
+	public List<Utente> cercaByCognomeENomeILike(String term) {
+		return repository.findByCognomeIgnoreCaseContainingOrNomeIgnoreCaseContainingOrderByNomeAsc(term, term);
+	}
 }
