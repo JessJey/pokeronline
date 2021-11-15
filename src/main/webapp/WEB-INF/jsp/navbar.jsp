@@ -20,6 +20,7 @@
 							<li class="nav-item"><a class="nav-link active"
 								aria-current="page"
 								href="${pageContext.request.contextPath}/home">Home</a></li>
+								
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" id="dropdown07"
 								data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
@@ -27,11 +28,11 @@
 									<li><a class="dropdown-item"
 										href="${pageContext.request.contextPath}/home">Home</a></li>
 									<li><a class="dropdown-item"
-										href="${pageContext.request.contextPath}/tavolo/search">Ricerca
-											Tavoli</a></li>
+										href="${pageContext.request.contextPath}/tavolo/mieitavoli">Lista My Tables</a></li>
 									<li><a class="dropdown-item"
 										href="${pageContext.request.contextPath}/tavolo/insert">Crea un Tavolo</a></li>
 								</ul></li>
+								
 							<sec:authorize access="hasRole('ADMIN')">
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#" id="dropdown01"

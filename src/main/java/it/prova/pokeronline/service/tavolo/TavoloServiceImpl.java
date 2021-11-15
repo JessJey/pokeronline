@@ -3,11 +3,14 @@ package it.prova.pokeronline.service.tavolo;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.pokeronline.model.Tavolo;
+import it.prova.pokeronline.model.Utente;
 import it.prova.pokeronline.repository.tavolo.TavoloRepository;
 
+@Service
 public class TavoloServiceImpl implements TavoloService  {
 
 	@Autowired
@@ -41,5 +44,11 @@ public class TavoloServiceImpl implements TavoloService  {
 	@Transactional(readOnly = true)
 	public List<Tavolo> findByExample(Tavolo example) {
 		return null;
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<Tavolo> findAllMyTavoli(Utente example) {
+		return repository.findAllByUtenteCreatore_IdIs(example.getId());
 	}
 }
