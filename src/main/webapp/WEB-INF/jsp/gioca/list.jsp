@@ -25,13 +25,9 @@
 				  ${successMessage}
 				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
 				</div>
-				<div class="alert alert-danger alert-dismissible fade show d-none" role="alert">
-				  Esempio di operazione fallita!
+				<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none':'' }" role="alert">
+				  ${errorMessage}
 				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
-				</div>
-				<div class="alert alert-info alert-dismissible fade show d-none" role="alert">
-				  Aggiungere d-none nelle class per non far apparire
-				   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
 				</div>
 		  
 		  
@@ -41,19 +37,15 @@
 				        <h5>Lista dei risultati</h5> 
 				    </div>
 				    <div class='card-body'>
-				    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/tavolo/insert">Add New</a>
-				    	<a href="${pageContext.request.contextPath }/game/search" class='btn btn-outline-secondary' >
-				            <i class='fa fa-chevron-left'></i> Torna alla Ricerca
-				        </a>
 				    
 				        <div class='table-responsive'>
 				            <table class='table table-striped ' >
 				                <thead>
 				                    <tr>
 			                         	<th>Denominazione</th>
-				                        <th>Credito Minimo</th>
-				                        <th>Esperienza Minima</th>
-				                        <th>Data di Creazione</th>
+				                        <th>Data Creazione</th>
+				                        <th>Esperienza minima</th>
+				                        <th>Cifra minima</th>
 				                        <th>Azioni</th>
 				                    </tr>
 				                </thead>
@@ -61,11 +53,16 @@
 				                	<c:forEach items="${tavolo_list_attribute }" var="tavoloItem">
 										<tr>
 											<td>${tavoloItem.denominazione }</td>
-											<td>${tavoloItem.creditoMinimo }</td>
-											<td>${tavoloItem.esperienzaMinima }</td>
-											<td><fmt:formatDate type = "date" value = "${tavoloItem.dateCreated }" /></td>
+											<td><fmt:formatDate type = "date" value = "${tavoloItem.dataCreazione }" /></td>
+											<td>${tavoloItem.esperienzaMin }</td>
+											<td>${tavoloItem.cifraMinima }</td>
 											<td>
-												<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/game/gioca/${tavoloItem.id }">Gioca</a>
+												<c:if test="${utente_attribute.esperienzaAccumulata >= tavoloItem.esperienzaMin && utente_attribute.creditoAccumulato >= tavoloItem.cifraMinima}">
+													<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/tavolo/gioca/${tavoloItem.id }">Gioca</a>
+												</c:if>
+												<c:if test="${utente_attribute.esperienzaAccumulata < tavoloItem.esperienzaMin || utente_attribute.creditoAccumulato < tavoloItem.cifraMinima}">
+													<p style="margin:0; color:red;">Non hai i requisiti.</p>
+												</c:if>
 											</td>
 										</tr>
 									</c:forEach>
