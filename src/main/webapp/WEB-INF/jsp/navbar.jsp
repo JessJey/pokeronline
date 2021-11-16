@@ -62,9 +62,11 @@
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" type="button" href="#"
 									id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Utente:
-										<sec:authentication property="name" />
+										<sec:authentication property="name" /> 
 								</a>
 									<div class="dropdown-menu" aria-labelledby="dropdown03">
+									<a class="dropdown-item"
+											>credito: ${userInfo.creditoAccumulato}</a> 
 										<a class="dropdown-item"
 											href="${pageContext.request.contextPath}/utente/resetuserpassword">Reset
 											Password</a> 
@@ -73,6 +75,7 @@
 											<a class="dropdown-item"
 											href="${pageContext.request.contextPath}/utente/credito">Add Credito
 											</a> 
+											
 									</div></li>
 							</sec:authorize>
 

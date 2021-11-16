@@ -18,7 +18,7 @@ public interface UtenteService {
 
 	public void rimuovi(Utente utenteInstance);
 
-	public List<Utente> findByExample(Utente example, String[] ruoli);
+	public List<Utente> findByExample(Utente example);
 	
 	public Utente findByUsername(String username);
 	

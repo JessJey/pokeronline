@@ -43,8 +43,8 @@
 								</div>
 								
 								<div class="col-md-6">
-									<label for="esperienzaMinima" class="form-label">Esperienza minima</label>
-									<input type="number" class="form-control" name="esperienzaMinima" id="esperienzaMinima" placeholder="Inserire esperienza minima" value="${search_gestione_tavolo_attr.esperienzaMin}">
+									<label for="esperienzaMin" class="form-label">Esperienza minima</label>
+									<input type="number" class="form-control" name="esperienzaMin" id="esperienzaMin" placeholder="Inserire esperienza minima" value="${search_gestione_tavolo_attr.esperienzaMin}">
 								</div>
 								
 								<sec:authorize access="hasRole('ADMIN')">

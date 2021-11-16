@@ -19,12 +19,12 @@ public class CustomUtenteRepositoryImpl implements CustomUtenteRepository {
 	private EntityManager entityManager;
 
 	@Override
-	public List<Utente> findByExample(Utente example, String[] ruoli) {
+	public List<Utente> findByExample(Utente example) {
 		Map<String, Object> paramaterMap = new HashMap<String, Object>();
 		List<String> whereClauses = new ArrayList<String>();
 		String role = "";
 
-		StringBuilder queryBuilder = new StringBuilder("select distinct r from Utente r join fetch r.ruoli c where r.id = r.id ");
+		StringBuilder queryBuilder = new StringBuilder("select distinct r from Utente r where r.id = r.id ");
 
 		if (StringUtils.isNotEmpty(example.getNome())) {
 			whereClauses.add(" r.nome  like :nome ");
@@ -46,28 +46,18 @@ public class CustomUtenteRepositoryImpl implements CustomUtenteRepository {
 			whereClauses.add("r.dateCreated >= :dateCreated ");
 			paramaterMap.put("dateCreated", example.getDateCreated());
 		}
-		if (example.getEsperienzaAccumulata() > 0) {
+		if (example.getEsperienzaAccumulata() != null) {
 			whereClauses.add("r.esperienzaAccumulata >= :esperienzaAccumulata ");
 			paramaterMap.put("esperienzaAccumulata", example.getEsperienzaAccumulata());
 		}
-		if (example.getCreditoAccumulato() > 0) {
-			whereClauses.add("r.creditoAccumulatod >= :creditoAccumulato ");
+		if (example.getCreditoAccumulato() != null) {
+			whereClauses.add("r.creditoAccumulato >= :creditoAccumulato ");
 			paramaterMap.put("creditoAccumulato", example.getCreditoAccumulato());
-		}
-		
-		if(ruoli != null && ruoli.length > 0) {
-			for (int i = 0; i < ruoli.length; i++) {
-				if(i == 0)
-					role += " c.id = " + ruoli[i];
-				else
-					role += " or c.id = " + ruoli[i];
-			}
 		}
 		
 		queryBuilder.append(!whereClauses.isEmpty()?" and ":"");
 		queryBuilder.append(StringUtils.join(whereClauses, " and "));
-		if(ruoli != null)
-			queryBuilder.append(" and " + role);
+		
 		TypedQuery<Utente> typedQuery = entityManager.createQuery(queryBuilder.toString(), Utente.class);
 
 		for (String key : paramaterMap.keySet()) {
@@ -76,5 +66,4 @@ public class CustomUtenteRepositoryImpl implements CustomUtenteRepository {
 
 		return typedQuery.getResultList();
 	}
-
 }

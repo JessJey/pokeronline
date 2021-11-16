@@ -63,8 +63,7 @@ public class UtenteController {
 
 	@PostMapping("/list")
 	public String listUtenti(Utente utenteExample, ModelMap model, HttpServletRequest request) {
-		String[] ruoliSelezionati = request.getParameterValues("ruoloInput");
-		List<Utente> utenti = utenteService.findByExample(utenteExample, ruoliSelezionati);
+		List<Utente> utenti = utenteService.findByExample(utenteExample);
 		model.addAttribute("utente_list_attribute", utenti);
 		return "utente/list";
 	}
@@ -198,7 +197,7 @@ public class UtenteController {
 	
 	@PostMapping("/addcredito")
 	public String addCredito(Model model, HttpServletRequest request) {
-		int credito = Integer.parseInt(request.getParameter("creditoAccumulato"));
+		Integer credito = Integer.parseInt(request.getParameter("creditoAccumulato"));
 		Utente utente = utenteService.findByUsername(request.getUserPrincipal().getName());
 		utente.setCreditoAccumulato(utente.getCreditoAccumulato()+credito);
 		

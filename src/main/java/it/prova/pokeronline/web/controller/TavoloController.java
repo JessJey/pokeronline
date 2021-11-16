@@ -143,7 +143,6 @@ public class TavoloController {
 	
 	@GetMapping("/gestione")
 	public String gestione(Model model) {
-
 		model.addAttribute("search_gestione_tavolo_attr", new TavoloDTO());
 		return "tavolo/searchmytavoli";
 	}

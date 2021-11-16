@@ -38,9 +38,9 @@ public class Utente {
 	@Column(name = "dateCreated")
 	private Date dateCreated;
 	@Column(name = "esperienzaAccumulata")
-	private int esperienzaAccumulata;
+	private Integer esperienzaAccumulata;
 	@Column(name = "creditoAccumulato")
-	private int creditoAccumulato;
+	private Integer creditoAccumulato;
 
 	@Enumerated(EnumType.STRING)
 	private StatoUtente stato;
@@ -74,7 +74,7 @@ public class Utente {
 	}
 
 	public Utente(String username, String password, String nome, String cognome, Date dateCreated,
-			int esperienzaAccumulata, int creditoAccumulato) {
+			Integer esperienzaAccumulata, Integer creditoAccumulato) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -160,19 +160,19 @@ public class Utente {
 		this.stato = stato;
 	}
 
-	public int getEsperienzaAccumulata() {
+	public Integer getEsperienzaAccumulata() {
 		return esperienzaAccumulata;
 	}
 
-	public void setEsperienzaAccumulata(int esperienzaAccumulata) {
+	public void setEsperienzaAccumulata(Integer esperienzaAccumulata) {
 		this.esperienzaAccumulata = esperienzaAccumulata;
 	}
 
-	public int getCreditoAccumulato() {
+	public Integer getCreditoAccumulato() {
 		return creditoAccumulato;
 	}
 
-	public void setCreditoAccumulato(int creditoAccumulato) {
+	public void setCreditoAccumulato(Integer creditoAccumulato) {
 		this.creditoAccumulato = creditoAccumulato;
 	}
 

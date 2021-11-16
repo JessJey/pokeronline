@@ -50,6 +50,9 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Transactional
 	public void inserisciNuovo(Utente utenteInstance) {
+		utenteInstance.setCreditoAccumulato(0);
+		utenteInstance.setEsperienzaAccumulata(0);
+		utenteInstance.setStato(StatoUtente.CREATO);
 		utenteInstance.setPassword(passwordEncoder.encode(utenteInstance.getPassword()));
 		utenteInstance.setDateCreated(new Date());
 		repository.save(utenteInstance);
@@ -61,8 +64,8 @@ public class UtenteServiceImpl implements UtenteService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Utente> findByExample(Utente example, String[] ruoli) {
-		return repository.findByExample(example, ruoli);
+	public List<Utente> findByExample(Utente example) {
+		return repository.findByExample(example);
 	}
 
 	@Transactional(readOnly = true)

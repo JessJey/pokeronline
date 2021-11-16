@@ -22,7 +22,7 @@ public class TavoloDTO {
 	@NotBlank(message = "{denominazione.notblank}")
 	private String denominazione;
 
-	@NotNull(message = "{esperienzaMinima.notblank}")
+	@NotNull(message = "{esperienzaMin.notblank}")
 	@Min(0)
 	private Integer esperienzaMin;
 

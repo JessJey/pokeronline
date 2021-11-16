@@ -6,6 +6,6 @@ import it.prova.pokeronline.model.Utente;
 
 public interface CustomUtenteRepository {
 
-	List<Utente> findByExample(Utente example, String[] ruoli);
+	List<Utente> findByExample(Utente example);
 	
 }

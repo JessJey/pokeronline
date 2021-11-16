@@ -217,4 +217,3 @@ public class CustomTavoloRepositoryImpl implements CustomTavoloRepository {
 			return typedQuery.getResultList();
 		}
 	}
-

@@ -52,6 +52,15 @@
                             		title="formato : gg/mm/aaaa"  name="dateCreated" >
 							</div>
 							
+							<div class="col-md-6">
+								<label for="esperienzaAccumulata" class="form-label">Esperienza</label>
+								<input type="number" class="form-control" name="esperienzaAccumulata" id="esperienzaAccumulata" placeholder="Inserire l'Esperienza Accumulata" >
+							</div>
+							<div class="col-md-6">
+								<label for="creditoAccumulato" class="form-label">Credito</label>
+								<input type="number" class="form-control" name="creditoAccumulato" id="creditoAccumulato" placeholder="Inserire il Credito Accumulato" >
+							</div>
+							
 							<div class="col-md-3">
 								<label for="stato" class="form-label">Stato</label>
 								    <select class="form-select " id="stato" name="stato" >

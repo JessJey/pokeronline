@@ -44,8 +44,8 @@
 								</div>
 							
 								<div class="col-md-6">
-									<label for="esperienzaMinima" class="form-label">Esperienza Minima </label>
-									<input type="number" class="form-control" name="esperienzaMinima" id="esperienzaMinima" placeholder="Inserire Esperienza Minima" value="0" >
+									<label for="esperienzaMin" class="form-label">Esperienza Minima </label>
+									<input type="number" class="form-control" name="esperienzaMin" id="esperienzaMin" placeholder="Inserire Esperienza Minima" value="0" >
 								</div>
 								
 								<div class="col-md-3">
@@ -57,15 +57,15 @@
 								<div class="col-md-6">
 										<label for="utenteSearchInput" class="form-label">Utente Creatore:</label>
 											<input class="form-control ${status.error ? 'is-invalid' : ''}" type="text" id="utenteSearchInput"
-												name="utenteInput" value="${insert_tavolo_attr.utenteCreazione.nome}${empty insert_tavolo_attr.utenteCreazione.nome?'':' '}${insert_tavolo_attr.utenteCreazione.cognome}">
-										<input type="hidden" name="utenteCreazione.id" id="utenteId" value="${insert_tavolo_attr.utenteCreazione.id}">
+												name="utenteInput" value="${insert_tavolo_attr.utenteCreatore.nome}${empty insert_tavolo_attr.utenteCreatore.nome?'':' '}${insert_tavolo_attr.utenteCreatore.cognome}">
+										<input type="hidden" name="utenteCreazione.id" id="utenteId" value="${insert_tavolo_attr.utenteCreatore.id}">
 								</div>
 									
 								<div class="col-md-6">
 										<label for="utenteSearchInput" class="form-label">Utente In Gioco:</label>
 											<input class="form-control ${status.error ? 'is-invalid' : ''}" type="text" id="utenteGiocatoreSearchInput"
-												name="utenteInput" value="${insert_tavolo_attr.utenteCreazione.nome}${empty insert_tavolo_attr.utenteCreazione.nome?'':' '}${insert_tavolo_attr.utenteCreazione.cognome}">
-										<input type="hidden" name="utenteGiocatore.id" id="utenteId" value="${insert_tavolo_attr.utenti}">
+												name="utenteInput" value="${insert_tavolo_attr.utenteCreatore.nome}${empty insert_tavolo_attr.utenteCreatore.nome?'':' '}${insert_tavolo_attr.utenteCreatore.cognome}">
+										<input type="hidden" name="utenteGiocatore.id" id="utentegiocoId" value="${insert_tavolo_attr.utenti}">
 								</div>
 								
 							<div class="col-12">
@@ -137,7 +137,7 @@
 									    minLength: 2,
 									    //quando seleziono la voce nel campo hidden deve valorizzarsi l'id
 									    select: function( event, ui ) {
-									    	$('#utenteId').val(ui.item.value);
+									    	$('#utentegiocoId').val(ui.item.value);
 									    	//console.log($('#utenteId').val())
 									        return false;
 									    }

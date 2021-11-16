@@ -58,7 +58,7 @@
 											<td>${tavoloItem.cifraMinima }</td>
 											<td>
 												<c:if test="${utente_attribute.esperienzaAccumulata >= tavoloItem.esperienzaMin && utente_attribute.creditoAccumulato >= tavoloItem.cifraMinima}">
-													<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/tavolo/gioca/${tavoloItem.id }">Gioca</a>
+													<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/gioca/eseguigioca/${tavoloItem.id }">Gioca</a>
 												</c:if>
 												<c:if test="${utente_attribute.esperienzaAccumulata < tavoloItem.esperienzaMin || utente_attribute.creditoAccumulato < tavoloItem.cifraMinima}">
 													<p style="margin:0; color:red;">Non hai i requisiti.</p>
