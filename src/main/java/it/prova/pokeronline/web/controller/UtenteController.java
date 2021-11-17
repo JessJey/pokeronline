@@ -170,7 +170,7 @@ public class UtenteController {
 		return "redirect:/utente";
 	}
 	
-	@GetMapping(value = "/searchUtentiAjax", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@GetMapping(value = "/searchUtenteAjax", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody String searchTavolo(@RequestParam String term) {
 
 		List<Utente> listaTavoloByTerm = utenteService.cercaByCognomeENomeILike(term);

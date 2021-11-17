@@ -44,7 +44,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter{
          .antMatchers("/utente/saveresetuserpw").hasAnyRole("ADMIN", "PLAYER", "SPECIAL_PLAYER")
          .antMatchers("/utente/credito").hasAnyRole("ADMIN", "PLAYER", "SPECIAL_PLAYER")
          .antMatchers("/utente/addcredito").hasAnyRole("ADMIN", "PLAYER", "SPECIAL_PLAYER")
-         .antMatchers("/utente/searchUtentiAjax").hasAnyRole("ADMIN", "PLAYER", "SPECIAL_PLAYER")
+         .antMatchers("/utente/searchUtenteAjax").hasAnyRole("ADMIN", "PLAYER", "SPECIAL_PLAYER")
          .antMatchers("/tavolo/**").hasAnyRole("ADMIN", "SPECIAL_PLAYER")
          .antMatchers("/tavolo/search").hasAnyRole("ADMIN", "PLAYER", "SPECIAL_PLAYER")
          .antMatchers("/tavolo/list").hasAnyRole("ADMIN", "PLAYER", "SPECIAL_PLAYER")

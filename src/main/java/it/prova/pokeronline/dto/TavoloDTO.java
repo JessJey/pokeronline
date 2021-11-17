@@ -38,6 +38,8 @@ public class TavoloDTO {
 	private Set<UtenteDTO> utenti = new HashSet<>(0);
 	
 	private Long giocatoreCercato;
+	
+	private UtenteDTO utenteGiocatore;
 
 	public TavoloDTO() {
 		super();
@@ -94,6 +96,17 @@ public class TavoloDTO {
 
 	public void setDataCreazione(Date dataCreazione) {
 		this.dataCreazione = dataCreazione;
+	}
+	
+	
+
+
+	public UtenteDTO getUtenteGiocatore() {
+		return utenteGiocatore;
+	}
+
+	public void setUtenteGiocatore(UtenteDTO utenteGiocatore) {
+		this.utenteGiocatore = utenteGiocatore;
 	}
 
 	public String getDenominazione() {

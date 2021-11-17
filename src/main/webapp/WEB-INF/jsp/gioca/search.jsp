@@ -6,6 +6,15 @@
 	 	<jsp:include page="../header.jsp" />
 	   
 	   <title>Ricerca</title>
+	     <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/jqueryUI/jquery-ui.min.css" />
+		<style>
+			.ui-autocomplete-loading {
+				background: white url("../assets/img/jqueryUI/anim_16x16.gif") right center no-repeat;
+			}
+			.error_field {
+		        color: red; 
+		    }
+		</style>
 	 </head>
 	   <body class="d-flex flex-column h-100">
 	   
@@ -57,14 +66,14 @@
 								<div class="col-md-6">
 										<label for="utenteSearchInput" class="form-label">Utente Creatore:</label>
 											<input class="form-control ${status.error ? 'is-invalid' : ''}" type="text" id="utenteSearchInput"
-												name="utenteInput" value="${insert_tavolo_attr.utenteCreatore.nome}${empty insert_tavolo_attr.utenteCreatore.nome?'':' '}${insert_tavolo_attr.utenteCreatore.cognome}">
-										<input type="hidden" name="utenteCreazione.id" id="utenteId" value="${insert_tavolo_attr.utenteCreatore.id}">
+												name="utenteInput" >
+										<input type="hidden" name="utenteCreatore.id" id="utenteId">
 								</div>
 									
 								<div class="col-md-6">
 										<label for="utenteSearchInput" class="form-label">Utente In Gioco:</label>
 											<input class="form-control ${status.error ? 'is-invalid' : ''}" type="text" id="utenteGiocatoreSearchInput"
-												name="utenteInput" value="${insert_tavolo_attr.utenteCreatore.nome}${empty insert_tavolo_attr.utenteCreatore.nome?'':' '}${insert_tavolo_attr.utenteCreatore.cognome}">
+												name="utenteInput" >
 										<input type="hidden" name="utenteGiocatore.id" id="giocatoreId" value="${insert_tavolo_attr.utenti}">
 								</div>
 								

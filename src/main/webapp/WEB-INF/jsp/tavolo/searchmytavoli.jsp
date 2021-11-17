@@ -5,6 +5,15 @@
 	<head>
 		<jsp:include page="../header.jsp" />
 		<title>Ricerca</title>
+		  <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/jqueryUI/jquery-ui.min.css" />
+		<style>
+			.ui-autocomplete-loading {
+				background: white url("../assets/img/jqueryUI/anim_16x16.gif") right center no-repeat;
+			}
+			.error_field {
+		        color: red; 
+		    }
+		</style>
 	</head>
 	<body class="d-flex flex-column h-100">
 		<jsp:include page="../navbar.jsp" />
@@ -49,11 +58,11 @@
 								
 								<sec:authorize access="hasRole('ADMIN')">
 									<div class="col-md-6">
-										<label for="utenteCreatoreSearchInput" class="form-label">Creatore tavolo:</label>
-										<input class="form-control " type="text" id="utenteCreatoreSearchInput"
-												name="utenteCreatoreInput" value="${search_gestione_tavolo_attr.utenteCreatore.nome}${search_gestione_tavolo_attr.utenteCreatore.cognome}">
-										<input type="hidden" name="utenteCreatore.id" id="utenteCreatoreSearchInput" value="${search_gestione_tavolo_attr.utenteCreatore.id}">
-									</div>
+										<label for="utenteSearchInput" class="form-label">Utente Creatore:</label>
+											<input class="form-control ${status.error ? 'is-invalid' : ''}" type="text" id="utenteSearchInput"
+												name="utenteInput" >
+										<input type="hidden" name="utenteCreazione.id" id="utenteId">
+								</div>
 								</sec:authorize>
 								
 									

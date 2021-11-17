@@ -166,54 +166,52 @@ public class CustomTavoloRepositoryImpl implements CustomTavoloRepository {
 
 	@Override
 	public List<Tavolo> findByExample(TavoloDTO example) {
-			Map<String, Object> paramaterMap = new HashMap<String, Object>();
-			List<String> whereClauses = new ArrayList<String>();
-			
-			if(example.getEsperienzaMin() == null)
-				example.setEsperienzaMin(0);
-			
-			if(example.getCifraMinima() == null)
-				example.setCifraMinima(0);
-			
-			StringBuilder queryBuilder = new StringBuilder("select distinct r from Tavolo r join fetch r.utenteCreatore uc");
+		Map<String, Object> paramaterMap = new HashMap<String, Object>();
+		List<String> whereClauses = new ArrayList<String>();
 
-			if (StringUtils.isNotEmpty(example.getDenominazione())) {
-				whereClauses.add(" r.denominazione  like :denominazione ");
-				paramaterMap.put("denominazione", "%" + example.getDenominazione() + "%");
-			}
-			if (example.getDataCreazione() != null) {
-				whereClauses.add(" r.dataCreazione >= :dataCreazione ");
-				paramaterMap.put("dataCreazione", example.getDataCreazione());
-			}
-			if (example.getEsperienzaMin() >= 0) {
-				whereClauses.add(" r.esperienzaMin >= :esperienzaMin ");
-				paramaterMap.put("esperienzaMin",example.getEsperienzaMin());
-			}
-			if (example.getCifraMinima() >= 0) {
-				whereClauses.add(" r.cifraMinima >= :cifraMinima ");
-				paramaterMap.put("cifraMinima", example.getCifraMinima());
-			}
-			if (example.getUtenteCreatore() != null) {
-				whereClauses.add(" uc.id = :idUtenteCreatore ");
-				paramaterMap.put("idUtenteCreatore", example.getUtenteCreatore());
-			}
-			
-			if(example.getGiocatoreCercato() != null) {
-				whereClauses.add(" g.id = :idGiocatore ");
-				paramaterMap.put("idGiocatore", example.getGiocatoreCercato());
-			}
-			
-			if(example.getGiocatoreCercato() != null)
-				queryBuilder.append(" join fetch r.giocatori g ");
-			queryBuilder.append(" where r.id = r.id ");
-			queryBuilder.append(!whereClauses.isEmpty()?" and ":"");
-			queryBuilder.append(StringUtils.join(whereClauses, " and "));
-			TypedQuery<Tavolo> typedQuery = entityManager.createQuery(queryBuilder.toString(), Tavolo.class);
+		if (example.getEsperienzaMin() == null)
+			example.setEsperienzaMin(1);
 
-			for (String key : paramaterMap.keySet()) {
-				typedQuery.setParameter(key, paramaterMap.get(key));
-			}
+		if (example.getCifraMinima() == null)
+			example.setCifraMinima(1);
 
-			return typedQuery.getResultList();
+		StringBuilder queryBuilder = new StringBuilder(
+				"select distinct r from Tavolo r join fetch r.utenteCreatore uc left join fetch r.giocatori gio where r.id = r.id ");
+
+		if (StringUtils.isNotBlank(example.getDenominazione())) {
+			whereClauses.add(" r.denominazione  like :denominazione ");
+			paramaterMap.put("denominazione", "%" + example.getDenominazione() + "%");
 		}
+		if (example.getDataCreazione() != null) {
+			whereClauses.add(" r.dataCreazione >= :dataCreazione ");
+			paramaterMap.put("dataCreazione", example.getDataCreazione());
+		}
+		if (example.getEsperienzaMin() >= 0) {
+			whereClauses.add(" r.esperienzaMin >= :esperienzaMin ");
+			paramaterMap.put("esperienzaMin", example.getEsperienzaMin());
+		}
+		if (example.getCifraMinima() >= 0) {
+			whereClauses.add(" r.cifraMinima >= :cifraMinima ");
+			paramaterMap.put("cifraMinima", example.getCifraMinima());
+		}
+		if (example.getUtenteCreatore() != null && example.getUtenteCreatore().getId() != null) {
+			whereClauses.add(" uc.id = :idUtenteCreatore ");
+			paramaterMap.put("idUtenteCreatore", example.getUtenteCreatore().getId());
+		}
+		if (example.getUtenteGiocatore() != null && example.getUtenteGiocatore().getId() != null) {
+			whereClauses.add(" gio.id = :giocatoreGiocatoreId ");
+			paramaterMap.put("giocatoreGiocatoreId", example.getUtenteGiocatore().getId());
+		}
+
+		queryBuilder.append(!whereClauses.isEmpty() ? " and " : "");
+		queryBuilder.append(StringUtils.join(whereClauses, " and "));
+		System.out.println(queryBuilder);
+		TypedQuery<Tavolo> typedQuery = entityManager.createQuery(queryBuilder.toString(), Tavolo.class);
+
+		for (String key : paramaterMap.keySet()) {
+			typedQuery.setParameter(key, paramaterMap.get(key));
+		}
+
+		return typedQuery.getResultList();
 	}
+}
