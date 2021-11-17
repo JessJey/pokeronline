@@ -27,10 +27,10 @@ public class CustomTavoloRepositoryImpl implements CustomTavoloRepository {
 		List<String> whereClauses = new ArrayList<String>();
 
 		if (tavolo.getEsperienzaMin() == null)
-			tavolo.setEsperienzaMin(1);
+			tavolo.setEsperienzaMin(0);
 
 		if (tavolo.getCifraMinima() == null)
-			tavolo.setCifraMinima(1);
+			tavolo.setCifraMinima(0);
 
 		StringBuilder queryBuilder = new StringBuilder(
 				"select r from Tavolo r join fetch r.utenteCreatore uc where r.id = r.id");

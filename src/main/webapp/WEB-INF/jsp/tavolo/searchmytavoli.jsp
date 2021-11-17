@@ -60,7 +60,7 @@
 								<div class="col-12">
 									<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
 									<input class="btn btn-outline-warning" type="reset" value="Ripulisci">
-									<a class="btn btn-outline-primary ml-2" href="${pageContext.request.contextPath }/film/insert">Add New</a>
+									<a class="btn btn-outline-primary ml-2" href="${pageContext.request.contextPath }/tavolo/insert">Add New</a>
 								</div>
 								
 							</form>

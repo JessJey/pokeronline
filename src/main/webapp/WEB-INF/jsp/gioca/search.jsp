@@ -65,7 +65,7 @@
 										<label for="utenteSearchInput" class="form-label">Utente In Gioco:</label>
 											<input class="form-control ${status.error ? 'is-invalid' : ''}" type="text" id="utenteGiocatoreSearchInput"
 												name="utenteInput" value="${insert_tavolo_attr.utenteCreatore.nome}${empty insert_tavolo_attr.utenteCreatore.nome?'':' '}${insert_tavolo_attr.utenteCreatore.cognome}">
-										<input type="hidden" name="utenteGiocatore.id" id="utentegiocoId" value="${insert_tavolo_attr.utenti}">
+										<input type="hidden" name="utenteGiocatore.id" id="giocatoreId" value="${insert_tavolo_attr.utenti}">
 								</div>
 								
 							<div class="col-12">
@@ -137,7 +137,7 @@
 									    minLength: 2,
 									    //quando seleziono la voce nel campo hidden deve valorizzarsi l'id
 									    select: function( event, ui ) {
-									    	$('#utentegiocoId').val(ui.item.value);
+									    	$('#giocatoreId').val(ui.item.value);
 									    	//console.log($('#utenteId').val())
 									        return false;
 									    }
